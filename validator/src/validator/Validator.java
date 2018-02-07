@@ -7,19 +7,22 @@ public class Validator {
 		Scanner kb =new Scanner(System.in);
 		System.out.println("Enter your password:");
 		String pw = kb.next();
-		CheckRules(pw);
-	}
-	public static void CheckRules(String pw) {
-		if(pw.length() < 8) {
-			System.out.println("Your password only passed one rule which is not allowed");
+		int count = 0;
+		int result = CheckRules(pw, count);
+		if(result == 2) {
+			System.out.println("All rules passed, your password is strong enough.");
 		}
 		else {
-			if(!pw.equals("password")) {
-				System.out.println("Your password passed all rules");
-			}
-			else {
-				System.out.println("Your password only passed one rule which is not allowed");
-			}
+			System.out.println(result+" rules passed, your password need to be stronger.");
+		}		
+	}
+	public static int CheckRules(String pw, int count) {
+		if(!pw.equals("password")) {
+			count++;
 		}
+		if(pw.length()>=8) {
+			count++;
+		}
+		return count;
 	}
 }
